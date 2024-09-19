@@ -2,9 +2,10 @@ namespace MovieDB.Services;
 
 public interface IMovieRequest
 {
-    // Create the repository pattern here
+    // Interface for recovering the movie data
     
-    // metodo para un timeout
-    //Task<HttpResponseMessage> GetAsync(string url, CancellationToken cancellationToken);
+    Task<Movie> GetMovieAsync(int movieId);
+    Task<HttpResponseMessage> GetTrendingMovies();
+    Task GetUpcomingMovies();
     
 }
