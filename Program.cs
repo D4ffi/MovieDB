@@ -1,7 +1,12 @@
+using MovieDB.Models;
+using MovieDB.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.Configure<MovieDbApi>(builder.Configuration.GetSection("MovieDbApi"));
+builder.Services.AddHttpClient<IMovieRequest, MovieRequest>();
 
 var app = builder.Build();
 
