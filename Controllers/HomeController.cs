@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MovieDB.Models;
@@ -19,7 +20,7 @@ public class HomeController : Controller
         _movieRequest = movieRequest;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
         return View();
     }
@@ -42,7 +43,7 @@ public class HomeController : Controller
             var response = await _movieRequest.GetTrendingMovies();
             response.EnsureSuccessStatusCode();
             var moviesResponse = await response.Content.ReadFromJsonAsync<MovieResponse>();
-            return Json(moviesResponse);
+            return Json(moviesResponse.Results);
         }
         catch (HttpRequestException e)
         {

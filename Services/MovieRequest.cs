@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.Extensions.Options;
 using MovieDB.Models;
 
@@ -5,7 +6,7 @@ namespace MovieDB.Services;
 
 public class MovieRequest : IMovieRequest
 {
-    // Create the repository pattern here
+
     private readonly HttpClient _httpClient;
     private readonly MovieDbApi _appSettings;
     
@@ -21,6 +22,15 @@ public class MovieRequest : IMovieRequest
     {
         var response = await _httpClient.GetAsync("movie/popular?language=en-US&page=1");
         return response;
+    }
+
+    public async Task<List<Movie>> GetTrendingMoviesAsList()
+    {
+        var response = await _httpClient.GetAsync("movie/popular?language=en-US&page=1");
+        response.EnsureSuccessStatusCode();
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+        var movies = JsonSerializer.Deserialize<MovieResponse>(jsonResponse)?.Results;
+        return movies ?? new List<Movie>();
     }
 
     public async Task GetUpcomingMovies()

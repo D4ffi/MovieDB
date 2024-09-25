@@ -8,6 +8,7 @@ html {
   }
 }
 
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -49,7 +50,7 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/banner.jpg");
   background-size: cover;
   background-position: center center;
-  filter: blur(5px); /* Aplica un desenfoque de 5 píxeles */
+  filter: blur(5px);
   z-index: 1;
 }
 
@@ -57,3 +58,13 @@ body {
   position: relative;
   z-index: 2;
 }
+
+.carousel-item {
+}
+
+.carousel-item {
+  height: 500px;
+  width: 100%;
+}
+
+

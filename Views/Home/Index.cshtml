@@ -13,26 +13,102 @@
 <div>
     <button type="button" id="btnFetchPopular">Movie</button>
 </div>
+
+<div id="trendingMoviesCarousel" class="carousel slide" data-bs-ride="carousel">
+    
+    <div class="carousel-indicators"></div>
+    <div class="carousel-inner"></div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#trendingMoviesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#trendingMoviesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+
+</div>
+
+@*<div id="trendingMoviesCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <button type="button" data-bs-target="#trendingMoviesCarousel" data-bs-slide-to="@i" 
+                    class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i + 1)"></button>
+        }
+    </div>
+    <div class="carousel-inner">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+        var movie = Model[i];
+        <div class="carousel-item @(i == 0 ? "active" : "")" style="background-image: url('https://image.tmdb.org/t/p/w500/@movie.PosterPath');">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>@movie.Title</h5>
+                <p>@movie.Overview</p>
+            </div>
+        </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#trendingMoviesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#trendingMoviesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>*@
+
 <script>
-    $(document).ready(function() {
-        $('#btnFetchPopular').click(function() {
+
+    function getTrendingMovies() {
+        $.ajax({
+            url: '/Home/GetTrendingMovies',
+            method: 'GET',
+            success: function(data) {
+                const carouselIndicators = document.querySelector('.carousel-indicators');
+                const carouselInner = document.querySelector('.carousel-inner');
+                data.forEach((movie,index) => {
+                
+                    const carouselIndicator = document.createElement('button');
+                    
+                    carouselIndicator.setAttribute('data-bs-target', '#trendingMoviesCarousel');
+                    carouselIndicator.setAttribute('data-bs-slide-to', index);
+                    
+                    const carouselItem = document.createElement('div');
+                    @*carouselItem.className = "carousel-item " + (index === 0 ? "active" : "");*@
+                    carouselItem.classList.add('carousel-item');
+                    if (index === 0) {
+                        carouselItem.classList.add('active');
+                        carouselIndicator.classList.add('active');
+                    }
+                    carouselItem.style = `background-image: url('https://image.tmdb.org/t/p/w500/${movie.poster_path}')`;
+                    carouselInner.appendChild(carouselItem);
+                    carouselIndicators.appendChild(carouselIndicator);
+                });
+                new bootstrap.Carousel(document.getElementById('trendingMoviesCarousel'));
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error fetching trending movies:', textStatus, errorThrown);
+            }
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        getTrendingMovies();
+
+        @**@@*$('#btnFetchPopular').click(function() {
             console.log("Fetching popular movies...");
             getTrendingMovies();
-        });
+        });*@
 
-        function getTrendingMovies() {
-            $.ajax({
-                url: '/Home/GetTrendingMovies',
-                method: 'GET',
-                success: function(data) {
-                    console.log(data);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error('Error fetching trending movies:', textStatus, errorThrown);
-                }
-            });
-        }
+    
     });
+
 </script>
 
 
