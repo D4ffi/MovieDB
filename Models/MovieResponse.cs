@@ -6,7 +6,7 @@ namespace MovieDB.Models;
 public class MovieResponse
 {
     [JsonPropertyName("page")]
-    public required int Page { get; set; } // investigar anotaciones
+    public required int Page { get; set; }
     [JsonPropertyName("total_results")]
     public required int TotalResults { get; set; }
     [JsonPropertyName("total_pages")]

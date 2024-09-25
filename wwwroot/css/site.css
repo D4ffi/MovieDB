@@ -12,6 +12,11 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -19,4 +24,36 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+.banner {
+  position: relative;
+  background-image: url("../images/banner.jpg");
+  background-size: contain;
+  background-position: center;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e7f1ff;
+  text-align: center;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../images/banner.jpg");
+  background-size: cover;
+  background-position: center center;
+  filter: blur(5px); /* Aplica un desenfoque de 5 píxeles */
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
 }

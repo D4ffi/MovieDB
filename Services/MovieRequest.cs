@@ -16,22 +16,16 @@ public class MovieRequest : IMovieRequest
         _appSettings = appsettings.Value;
         
     }
-    
-    public Task<Movie> GetMovieAsync(int movieId)
-    {
-        throw new NotImplementedException();
-    }
 
     public async Task<HttpResponseMessage> GetTrendingMovies()
     {
         var response = await _httpClient.GetAsync("movie/popular?language=en-US&page=1");
-
         return response;
     }
 
     public async Task GetUpcomingMovies()
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.GetAsync("movie/upcoming?language=en-US&page=1");
     }
     
 }

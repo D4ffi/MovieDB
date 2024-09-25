@@ -2,7 +2,37 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="banner">
+    
+    <div class="banner-content text-center">
+        <h1 class="display-4 font-montserrat">Welcome</h1>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
 </div>
+
+<div>
+    <button type="button" id="btnFetchPopular">Movie</button>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#btnFetchPopular').click(function() {
+            console.log("Fetching popular movies...");
+            getTrendingMovies();
+        });
+
+        function getTrendingMovies() {
+            $.ajax({
+                url: '/Home/GetTrendingMovies',
+                method: 'GET',
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching trending movies:', textStatus, errorThrown);
+                }
+            });
+        }
+    });
+</script>
+
+
