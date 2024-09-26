@@ -24,13 +24,10 @@ public class MovieRequest : IMovieRequest
         return response;
     }
 
-    public async Task<List<Movie>> GetTrendingMoviesAsList()
+    public async Task<HttpResponseMessage> GetMovieDetail(int id)
     {
-        var response = await _httpClient.GetAsync("movie/popular?language=en-US&page=1");
-        response.EnsureSuccessStatusCode();
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        var movies = JsonSerializer.Deserialize<MovieResponse>(jsonResponse)?.Results;
-        return movies ?? new List<Movie>();
+        var response = await _httpClient.GetAsync($"movie/{id}");
+        return response;
     }
 
     public async Task GetUpcomingMovies()

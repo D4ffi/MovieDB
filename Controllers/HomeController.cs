@@ -42,7 +42,7 @@ public class HomeController : Controller
         {
             var response = await _movieRequest.GetTrendingMovies();
             response.EnsureSuccessStatusCode();
-            var moviesResponse = await response.Content.ReadFromJsonAsync<MovieResponse>();
+            var moviesResponse = await response.Content.ReadFromJsonAsync<TrendingMovieResponse>();
             return Json(moviesResponse.Results);
         }
         catch (HttpRequestException e)

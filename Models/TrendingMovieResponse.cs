@@ -3,7 +3,7 @@ using MovieDB.Services;
 
 namespace MovieDB.Models;
 
-public class MovieResponse
+public class TrendingMovieResponse
 {
     [JsonPropertyName("page")]
     public required int Page { get; set; }
