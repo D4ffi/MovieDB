@@ -68,3 +68,54 @@ body {
 }
 
 
+
+
+
+.movie-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.movie-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.movie-poster {
+  max-width: 300px;
+  margin-right: 20px;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.movie-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.movie-meta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.movie-overview {
+  font-size: 1.25rem;
+}
+
+.movie-rating {
+  background-color: #007bff;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+
+

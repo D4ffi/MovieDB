@@ -2,17 +2,21 @@
     ViewData["Title"] = "Detail Page";
 }
 
-<div class="detailCard" style="max-width: 540px;">
-    <div class="row g-0">
-        <div id="posterImg" class="col-md-4">
-            <img src="https://image.tmdb.org/t/p/w500/@Model.PosterPath" class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 id="movieTittle" class="card-title">@Model.Title</h5>
-                <p id="movieDesc" class="card-text">@Model.Overview</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<title>@Model.Title</title>
+
+<body>
+<div class="movie-card">
+    <div class="movie-content">
+        <img src="https://image.tmdb.org/t/p/w500/@Model.PosterPath" alt="Movie Poster" class="movie-poster">
+        <div class="movie-info">
+            <h1 class="movie-title">@Model.Title</h1>
+            <div class="movie-meta d-flex align-items-center">
+                <span>@Model.ReleaseDate</span>
+                <span class="movie-rating">@Model.VoteAverage</span>
             </div>
+            <h4>About</h4>
+            <p class="movie-overview">@Model.Overview</p>
         </div>
     </div>
 </div>
+</body>
